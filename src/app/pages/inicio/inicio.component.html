@@ -1,0 +1,51 @@
+<div class="container p-5">
+
+    <div class="card">
+        <div class="card-header">
+            Lista de Notas
+        </div>
+        <div class="card-body">
+
+            <div class="alert alert-danger text-center" role="alert" *ngIf="listaNotas.length == 0">
+                ¡Lista de notas vacia, agrega una para verlas aqui!
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" *ngIf="listaNotas.length > 0">
+                            <thead>
+                                <tr>
+                                    <!-- <th class="text-center" scope="col">#</th> -->
+                                    <th class="text-center col-md-8" >Nota</th>
+                                    <th class="text-center col-md-4" >Acciones</th>
+                                </tr>
+                            </thead>
+                            <tr *ngFor="let nota of listaNotas">
+                                <!-- <th> {{nota.id}}</th> -->
+                                <th> {{nota.description}}</th>
+                                <th class="text-center"> <button type="button" name="eliminar" (click)="delete(nota)"
+                                        class="btn btn-warning ">Eliminar</button>
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form class="alert alert-success" (ngSubmit)="create(); formNota.reset()" #formNota="ngForm">
+        <div class="form-group">
+            <label for="description">Descripcion Nota:</label>
+            <textarea [(ngModel)]="nota.description" #description="ngModel" name="description" class="form-control"
+                rows="3"></textarea>
+        </div>
+
+        <div class="alert alert-danger" role="alert" *ngIf="notaVacia">
+            ¡No se puede dejar la nota vacia, debes agregar una descripcion!
+        </div>
+        <button type="submit" value="reset form" class="btn btn-primary">Agregar Nota</button>
+    </form>
+
+</div>
